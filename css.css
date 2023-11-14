@@ -1,0 +1,348 @@
+@font-face {
+  font-family: "Helvetica";
+  src: url("Helvetica-Font/Helvetica.ttf");
+  font-style: normal;
+  font-stretch: normal;
+  font-weight: 250 900;
+}
+
+@font-face {
+	font-family: "Helvetica_bold";
+	src: url("Helvetica-Font/Helvetica-Bold.ttf");
+	font-style: normal;
+	font-stretch: normal;
+	font-weight: 250 900;
+  }
+
+  @font-face {
+	font-family: "Helvetica_bold_oblique";
+	src: url("Helvetica-Font/Helvetica-BoldOblique.ttf");
+	font-style: normal;
+	font-stretch: normal;
+	font-weight: 250 900;
+  }
+  @font-face {
+	font-family: "Helvetica_oblique";
+	src: url("Helvetica-Font/Helvetica-Oblique.ttf");
+	font-style: normal;
+	font-stretch: normal;
+	font-weight: 250 900;
+  }
+  @font-face {
+	font-family: "Helvetica_des";
+	src: url("Helvetica-Font/helvetica-destru-pix.ttf");
+	font-style: normal;
+	font-stretch: normal;
+	font-weight: 250 900;
+  }
+
+  @font-face {
+	font-family: "Helvetica_rounded";
+	src: url("Helvetica-Font/helvetica-rounded-bold-5871d05ead8de.otf");
+	font-style: normal;
+	font-stretch: normal;
+	font-weight: 250 900;
+  }
+
+  @font-face {
+	font-family: "Helvetica_compressed";
+	src: url("Helvetica-Font/helvetica-compressed-5871d14b6903a.otf");
+	font-style: normal;
+	font-stretch: normal;
+	font-weight: 250 900;
+  }
+
+
+:root {
+	/* Je kan variabelen gebruiken. Handig! */
+	--page-background: black;
+	--text-color: white;
+	--body-color: hsl(0,0%,10%);
+	--highlight-color: red;
+	--fold: 35; /* hoe breed mag een paragraaf zijn */
+	--ratio: 1.414;
+}
+
+/* RESET */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/* BASICS */
+html {
+	/* 
+	Kies hier zelf een passende font-stack. Deze is zeker niet goed genoeg!
+	https://modernfontstacks.com/
+	*/
+	font-family: Georgia, serif;
+	font-family: NCND,'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
+}
+body {
+	font-family: "Helvetica";
+	margin: 0;
+	font-size: 1.4rem;
+	background-color: var(--page-background);
+	color: var(--body-color);
+}
+
+/* LAYOUT */
+main,
+figcaption {
+	display: grid;
+	grid-template-columns: minmax(1em,auto) 1fr minmax(1em,auto);
+}
+:where(main, figcaption) > * {
+	/* je kan ook rekenen met CSS. 
+	Hier doen we de fold x de standaard fontgrootte */
+	max-width: calc(var(--fold) * 1rem);
+	width: 100%;
+	margin: 0 auto 1rem;
+	grid-column-start: 2;
+}
+
+/* BLOCK */
+h1 {
+	/* 
+	vw = viewport width: 
+	grootte is afhankelijk van de breedte van het scherm.
+	vh = viewport height.
+	vmin = viewport height, óf width, degene die kleiner is.
+	vmax = dat kan je zelf bedenken
+	
+	clamp() heeft drie waardes:
+	1. niet kleiner dan
+	2. idealiter
+	3. maximale grootte
+	 */
+	font-family: "Helvetica_bold";
+	font-size: clamp(2em,10vw,5em);
+	line-height: 1; /* lager cijfer als het font groter is. */
+	color: var(--text-color);
+	margin-bottom: 1em;
+	grid-column-start: 1;
+	grid-column-end: -1;
+}
+
+.object {
+	cursor: pointer;
+	transition: color 0.3s ease; 
+  }
+
+h1:hover {
+    color: red; 
+  }
+
+h2 {
+	font-size: calc( var(--ratio) *  var(--ratio) * var(--ratio) * 1rem );
+	line-height: 1; /* lager cijfer als het font groter is. */
+	font-weight: normal; /* bold, normal */
+	color: var(--highlight-color);
+	margin-top: 2rem;
+}
+h3, h4 {
+	font-size: calc( var(--ratio) * var(--ratio) * 1rem );
+	font-weight: normal; /* bold, normal */
+	color: var(--text-color);
+}
+
+p{
+	color: var(--text-color);
+}
+
+blockquote {
+	max-width: calc(var(--fold) * .7em);
+	font-size: clamp(1em, 4vw, 1.4em);
+	margin: 1em auto 2em;
+	padding: 0 1em;
+	font-style: italic;
+}
+blockquote cite {
+	font-style: normal;
+}
+blockquote cite::before {
+	content: '—';
+}
+
+/*////////////code van sjors/////////////*/
+
+.object {
+	margin: 0;
+	position: relative;
+    left: -700px; 
+    animation: moveInOut 20s linear infinite; 
+}
+
+@keyframes moveInOut {
+    0% {
+        left: -700px; 
+    }
+
+    100% {
+        left: 110%; 
+    }
+}
+
+.rotate_text_een {
+    transform: rotate(90deg); 
+    font-size: 24px; 
+	margin-left: 20%;
+	margin-bottom: 10%;
+	margin-top: -20%;
+}
+
+.container img {
+	position: relative;
+}
+
+@keyframes draaien {
+    0% {
+        transform:rotate(0);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    100% {
+        transform: rotate(0);
+    }
+      
+} 
+
+.History{
+ animation-name:draaien;
+ animation-duration: 5s;
+ animation-iteration-count: infinite;
+}
+
+
+img{
+	max-width: 80%;
+	height: auto;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@keyframes fontChange {
+    0% {
+        font-weight: bold;
+        font-style: normal;
+    }
+    33% {
+        font-weight: normal;
+        font-style: normal;
+    }
+    66% {
+        font-weight: bold;
+        font-style: italic;
+    }
+    100% {
+        font-weight: normal;
+        font-style: italic;
+    }
+}
+
+.anders {
+    font-family:"Helvetica"; 
+    font-size: 50px;
+    animation: fontChange 6s infinite;
+	text-align: center; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes changeFont {
+	0% {
+	  font-family: "Helvetica";
+	}
+	20% {
+	  font-family: "Helvetica_bold";
+	}
+	40% {
+	  font-family: "Helvetica_des";
+	}
+	60% {
+	  font-family: "Helvetica_bold_oblique";
+	}
+	70% {
+	  font-family: "Helvetica_oblique";
+	}
+	80% {
+		font-family: "Helvetica_rounded";
+	}
+	100% {
+		font-family: "Helvetica_compressed";
+	}
+  }
+
+  .anders{
+	font-size: 50px;
+	animation: changeFont 1s infinite; 
+  }
+
+  @keyframes moveUpDown {
+	0%, 100% {
+	  transform: translateY(0); 
+	}
+	50% {
+	  transform: translateY(-20px); 
+	}
+  }
+  
+  .patta{
+	animation: moveUpDown 2s ease-in-out infinite; 
+  }
+  
+h3:hover, h4:hover{
+    transition: 1s;
+    cursor:pointer;
+}
+
+h3:hover{
+	color: red;
+	cursor: pointer;
+	animation: heartbeat 1s infinite; 
+  }
+  
+  @keyframes heartbeat {
+	0% {
+	  transform: scale(1); 
+	}
+	50% {
+	  transform: scale(1.2); 
+	}
+	100% {
+	  transform: scale(1); 
+	}
+  }
+
+@keyframes rollen {
+    0% {
+        color: aqua;
+    }
+
+    50% {
+        color: red;
+    }
+
+    100% {
+        color: yellow;
+    }
+      
+} 
+
+h4:hover{
+	animation-name:rollen;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+   }
+
+
+   .schrijven {
+    border: 2px solid white;
+    padding: 10px; 
+}
